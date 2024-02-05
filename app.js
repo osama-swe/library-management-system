@@ -4,7 +4,9 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const expHBS = require('express3-handlebars');
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
+
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -32,6 +34,11 @@ app.use(bodyParser.json())
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/book', bookRouter);
+
+const db = require('./database'),
+    bookRoutes = require('./controllers/book.controller')
+app.use('/show-books', bookRoutes);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
