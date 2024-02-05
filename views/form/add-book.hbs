@@ -1,0 +1,27 @@
+<div class="col-sm-6 col-md-6 col-sm-offset-3">
+    <form action="/book/add-book" method="post">
+        <div class="form-group">
+            <label for="book_title">Book Title:</label>
+            <input type="text" name="book_title" class="form-control" id="book_title">
+        </div>
+        <div class="form-group">
+            <label for="author_name">Author Name:</label>
+            <input type="text" name="author_name" class="form-control" id="author_name">
+        </div>
+        <div class="form-group">
+            <label for="isbn">ISBN:</label>
+            <input type="text" name="isbn" class="form-control" id="isbn">
+        </div>
+        <div class="form-group">
+            <label for="available_quantity">Available Quantity:</label>
+            <input type="number" min="0" name="available_quantity" class="form-control" id="available_quantity">
+        </div>
+        <div class="form-group">
+            <label for="shelf_location">Shelf Location:</label>
+            <input type="text" name="shelf_location" class="form-control" id="shelf_location">
+        </div>
+        <button type="submit" class="btn btn-default btn-primary">Add Book</button>
+
+    </form>
+
+</div>
