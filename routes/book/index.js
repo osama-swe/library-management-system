@@ -42,6 +42,47 @@ router.post('/add-book', async (req, res) => {
     }
 });
 
+router.get('/update-book', async (req, res) => {
+    const { id } = req.query;
+
+    try {
+        // Fetch the book details from the database using the ID
+        const [book] = await db.query('SELECT * FROM book WHERE id = ?', [id]);
+
+        // Render the update-book view with the book details
+        res.render('update-book', { book }); // Assuming the book is returned as an array
+    } catch (error) {
+        console.error("Error fetching book details:", error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+router.post('/update', async (req, res) => {
+    const { id, title, author, quantity, location } = req.body;
+
+    try {
+        // Update the book details in the database
+        await db.query('UPDATE book SET title=?, author=?, quantity=?, location=? WHERE id=?', [title, author, quantity, location, id]);
+        res.redirect('/book/show-books'); // Redirect back to the show-books page after updating
+    } catch (error) {
+        console.error("Error updating book:", error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+router.delete('/delete-book', async (req, res) => {
+    const { id } = req.query;
+
+    try {
+        // Delete the book from the database using the ID
+        await db.query('DELETE FROM book WHERE id = ?', [id]);
+        res.sendStatus(204); // Send a 204 No Content response if successful
+    } catch (error) {
+        console.error("Error deleting book:", error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
 
 
 module.exports = router;
