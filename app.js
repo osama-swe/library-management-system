@@ -6,17 +6,26 @@ var logger = require('morgan');
 const expHBS = require('express3-handlebars');
 var bodyParser = require('body-parser');
 
-
-
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var bookRouter = require('./routes/book');
 
 var app = express();
 
+// Define the lookup helper function
+var lookup = function (obj, key) {
+  return obj && obj[key];
+};
+
 // view engine setup
-app.engine('hbs', expHBS({defaultLayout: 'layout', extname: '.hbs'}));
-//app.set('views', path.join(__dirname, 'views'));
+var hbs = expHBS.create({
+  defaultLayout: 'layout',
+  extname: '.hbs',
+  helpers: {
+    lookup: lookup
+  }
+});
+app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 
 app.use(logger('dev'));
@@ -26,10 +35,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // parse application/json
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

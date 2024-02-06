@@ -83,6 +83,32 @@ router.delete('/delete-book', async (req, res) => {
     }
 });
 
+// Route to render the search form
+router.get('/search-books', function(req, res, next) {
+    res.render('search-books'); // Assuming your view file is named search-books.hbs
+});
+
+// Route to handle the search query
+router.get('/search', async (req, res) => {
+    const { query } = req.query;
+    if (!query) {
+        return res.status(400).send('Invalid search query');
+    }
+
+    try {
+        // Perform search query in the database to get the IDs
+        const rows = await db.query("SELECT * FROM Book WHERE title LIKE ? OR author LIKE ? OR isbn LIKE ?", [`%${query}%`, `%${query}%`, `%${query}%`]);
+
+        if (rows.length === 0) {
+            return res.render('no-results');
+        }
+        res.render('search-results', {books: rows[0]});
+    } catch (error) {
+        console.error('Error searching for books:', error);
+        res.status(500).send('An error occurred while searching for books');
+    }
+});
+
 
 
 module.exports = router;

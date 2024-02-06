@@ -7,6 +7,7 @@
             <li id="homeLink"><a href="/">Home</a></li>
             <li id="addBookLink"><a href="/book/add-book">Add Book</a></li>
             <li id="showBooksLink"><a href="/book/show-books">Show All Books</a></li>
+            <li id="searchBooksLink"><a href="/book/search-books">Search Books</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
@@ -31,6 +32,8 @@
             document.getElementById('addBookLink').classList.add('active');
         } else if (path === '/book/show-books') {
             document.getElementById('showBooksLink').classList.add('active');
+        } else if (path === '/book/search-books') {
+            document.getElementById('searchBooksLink').classList.add('active');
         }
     });
 </script>
