@@ -35,10 +35,6 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/book', bookRouter);
 
-const db = require('./database'),
-    bookRoutes = require('./controllers/book.controller')
-app.use('/show-books', bookRoutes);
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
