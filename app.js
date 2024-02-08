@@ -12,6 +12,7 @@ var bookRouter = require('./routes/book');
 var borrowerRouter = require('./routes/borrower');
 var borrowRouter = require('./routes/borrow');
 var returnRouter = require('./routes/return');
+var overDueRouter = require('./routes/overdue');
 
 var app = express();
 
@@ -49,6 +50,7 @@ app.use('/book', bookRouter);
 app.use('/borrower', borrowerRouter);
 app.use('/borrow', borrowRouter);
 app.use('/return', returnRouter);
+app.use('/overdue', overDueRouter);
 
 
 // catch 404 and forward to error handler

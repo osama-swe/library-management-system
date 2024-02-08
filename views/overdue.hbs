@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overdue Books</title>
+</head>
+<body>
+<h1>Overdue Books</h1>
+
+{{#if overdueBooks}}
+    <h2>Books Overdue and Not Returned</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Due Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each overdueBooks}}
+            <tr>
+                <td>{{this.title}}</td>
+                <td>{{this.author}}</td>
+                <td>{{this.due_date}}</td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+{{else}}
+    <p>No books are overdue and not returned.</p>
+{{/if}}
+</body>
+</html>

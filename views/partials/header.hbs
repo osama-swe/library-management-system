@@ -12,6 +12,7 @@
             <li id="showBorrowersLink"><a href="/borrower/show-borrowers">Show All Borrowers</a></li>
             <li id="borrowBookLink"><a href="/borrow">Borrow Book</a></li>
             <li id="returnBookLink"><a href="/return">Return Book</a></li>
+            <li id="overdueLink"><a href="/overdue">Overdue Books</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
@@ -38,6 +39,16 @@
             document.getElementById('showBooksLink').classList.add('active');
         } else if (path === '/book/search-books') {
             document.getElementById('searchBooksLink').classList.add('active');
+        } else if (path === '/borrower/register-borrower') {
+            document.getElementById('registerBorrowerLink').classList.add('active');
+        } else if (path === '/borrower/show-borrowers') {
+            document.getElementById('showBorrowersLink').classList.add('active');
+        } else if (path === '/borrow') {
+            document.getElementById('borrowBookLink').classList.add('active');
+        } else if (path === '/return') {
+            document.getElementById('returnBookLink').classList.add('active');
+        } else if (path === '/overdue') {
+            document.getElementById('overdueLink').classList.add('active');
         }
     });
 </script>
