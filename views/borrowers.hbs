@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Borrowers</title>
+<style>
+    table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    th, td {
+    padding: 10px;
+    text-align: center;
+}
+
+    th {
+    background-color: #f2f2f2;
+}
+
+    tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+    tr:hover {
+    background-color: #ddd;
+}
+
+    .action-icons {
+    display: flex;
+    justify-content: center;
+}
+</style>
+</head>
+<body>
+<h1>All Borrowers</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Registered Date</th>
+        <th>Actions</th> <!-- Add a new column for actions -->
+    </tr>
+    </thead>
+    <tbody>
+    {{#each borrowers}}
+    <tr>
+        <td>{{this.name}}</td>
+        <td>{{this.email}}</td>
+        <td>{{this.registered_date}}</td>
+        <td class="action-icons">
+            <!-- Update Link -->
+            <a href="/borrower/update-borrower?id={{this.id}}">Update</a>
+            ||
+            <!-- Delete Link -->
+            <a href="#" class="delete-borrower" data-borrower-id="{{this.id}}">Delete</a>
+        </td>
+    </tr>
+    {{/each}}
+        </tbody>
+        </table>
+
+        <!-- JavaScript to handle update action -->
+        <script>
+        document.addEventListener("DOMContentLoaded", function() {
+        const updateIcons = document.querySelectorAll('.update-borrower');
+
+        updateIcons.forEach(icon => {
+        icon.addEventListener('click', function(event) {
+        event.preventDefault();
+        const borrowerId = this.getAttribute('data-borrower-id');
+        // Redirect to update book page or show update form based on your requirement
+        window.location.href = `/borrower/update-borrower?id=${borrowerId}`;
+    });
+    });
+    });
+    </script>
+
+    <!-- JavaScript to handle delete action -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+        const deleteLinks = document.querySelectorAll('.delete-borrower');
+
+        deleteLinks.forEach(link => {
+        link.addEventListener('click', function(event) {
+        event.preventDefault();
+        const borrowerId = this.getAttribute('data-borrower-id');
+        // Send an HTTP DELETE request to delete the book
+        fetch(`/borrower/delete-borrower?id=${borrowerId}`, {
+        method: 'DELETE'
+    })
+        .then(response => {
+        if (response.ok) {
+        // Book deleted successfully, reload the page to reflect changes
+        window.location.reload();
+    } else {
+        console.error('Failed to delete borrower');
+    }
+    })
+        .catch(error => console.error('Error deleting borrower:', error));
+    });
+    });
+    });
+    </script>
+</body>
+</html>

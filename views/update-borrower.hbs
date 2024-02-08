@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Borrower</title>
+</head>
+<body>
+<h1>Update Borrower</h1>
+<form action="/borrower/update" method="POST">
+    {{#each borrower}}
+        <input type="hidden" name="id" value="{{this.id}}">
+        <label for="borrower_name">Borrower Name:</label>
+        <input type="text" name="borrower_name" id="borrower_name" value="{{this.name}}"><br>
+        <label for="borrower_email">Email:</label>
+        <input type="text" name="borrower_email" id="borrower_email" value="{{this.email}}"><br>
+    {{/each}}
+    <button type="submit">Update</button>
+</form>
+</body>
+</html>
