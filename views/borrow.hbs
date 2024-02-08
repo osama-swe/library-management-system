@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Borrow Books</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+<h1>Available Books</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Quantity Available</th>
+        <th>Select Borrower ID</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#each books}}
+        <tr>
+            <td>{{this.title}}</td>
+            <td>{{this.author}}</td>
+            <td>{{this.quantity}}</td>
+            <td>
+                <form method="POST" action="/borrow">
+                    <input type="hidden" name="bookId" value="{{this.id}}">
+                    <select name="borrowerId">
+                        {{#each ../borrowerIds}}
+                            <option value="{{this.id}}">{{this.id}}</option>
+                        {{/each}}
+                    </select>
+            </td>
+            <td>
+                <button type="submit">Borrow</button>
+                </form>
+            </td>
+        </tr>
+    {{/each}}
+    </tbody>
+</table>
+</body>
+</html>

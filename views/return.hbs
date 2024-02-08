@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Return Book</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+<h1>Return Book</h1>
+
+{{#if transactions}}
+    <h2>Transactions to Return</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Transaction ID</th>
+            <th>Book ID</th>
+            <th>Borrower ID</th>
+            <th>Due Date</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each transactions}}
+            <tr>
+                <td>{{this.id}}</td>
+                <td>{{this.book_id}}</td>
+                <td>{{this.borrower_id}}</td>
+                <td>{{this.due_date}}</td>
+                <td>
+                    <form method="POST" action="/return/mark-as-returned">
+                        <input type="hidden" name="transactionId" value="{{this.id}}">
+                        <input type="hidden" name="bookId" value="{{this.book_id}}">
+                        <button type="submit">Return</button>
+                    </form>
+                </td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+{{else}}
+    <p>No transactions to return.</p>
+{{/if}}
+</body>
+</html>
